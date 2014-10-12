@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
-   public interface IAlgoritm
+   public interface IAlgoritmModel
     {
        //Запускает расчет алгоритма
        void Run();
        //Визуальное отображение на блоке
        object VisualContent {get;}
        string AlgoritmName { get;}
+
+       event EventHandler AlgoritmCalculated;
     }
 }

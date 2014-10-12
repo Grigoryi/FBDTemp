@@ -11,8 +11,8 @@ namespace FBDTemp.Model
     {
       public Dictionary<string, object> input;
 
-      private ObservableCollection<IAlgoritm> _algoritms;
-      public ICollection<IAlgoritm> Algoritms
+      private ObservableCollection<IAlgoritmModel> _algoritms;
+      public ICollection<IAlgoritmModel> Algoritms
       {
           get { return _algoritms; }
       }

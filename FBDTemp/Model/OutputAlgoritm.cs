@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
- public abstract  class OutputAlgoritm : IAlgoritm
+ public abstract  class OutputAlgoritm : IAlgoritmModel
     {
        
        
@@ -28,6 +28,8 @@ namespace FBDTemp.Model
      { 
          get { return _algoritmname; } 
      }
+     
+     public event EventHandler AlgoritmCalculated = delegate { };
      #endregion
     }
 }

@@ -72,8 +72,12 @@
     <Compile Include="ISelectable.cs" />
     <Compile Include="Model\BaseAlgoritm.cs" />
     <Compile Include="Model\CompositionAlgoritm.cs" />
-    <Compile Include="Model\IAlgoritm.cs" />
+    <Compile Include="Model\IAlgoritmModel.cs" />
+    <Compile Include="Model\IBlockModel.cs" />
+    <Compile Include="Model\IConnection.cs" />
     <Compile Include="Model\InputAlgoritm.cs" />
+    <Compile Include="Model\IStateBlockModel.cs" />
+    <Compile Include="Model\Notifier.cs" />
     <Compile Include="Model\OutputAlgoritm.cs" />
     <Compile Include="ViewModel\BaseBlockViewModel.cs" />
     <Compile Include="ViewModel\BlockViewModel.cs" />
