@@ -9,6 +9,8 @@ namespace FBDTemp.Model
    public interface IConnection
     {
        IBlockModel From { get; set; }
+       int FromPort { get; set; }
        IBlockModel To { get; set; }
+       int ToPort { get; set; }
     }
 }

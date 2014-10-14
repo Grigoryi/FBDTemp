@@ -63,6 +63,7 @@
     <Compile Include="ISelectable.cs" />
     <Compile Include="Model\BaseAlgoritm.cs" />
     <Compile Include="Model\CompositionAlgoritm.cs" />
+    <Compile Include="Model\ConnectorModel.cs" />
     <Compile Include="Model\IAlgoritmModel.cs" />
     <Compile Include="Model\IBlockModel.cs" />
     <Compile Include="Model\IConnection.cs" />

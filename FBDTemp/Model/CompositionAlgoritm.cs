@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
-  public abstract  class CompositionAlgoritm
+  public abstract  class CompositionAlgoritm: BaseAlgoritm
     {
       public Dictionary<string, object> input;
-
-      private ObservableCollection<IAlgoritmModel> _algoritms;
-      public ICollection<IAlgoritmModel> Algoritms
-      {
-          get { return _algoritms; }
-      }
+      
+      
     }
 }

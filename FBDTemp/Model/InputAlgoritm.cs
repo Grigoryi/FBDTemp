@@ -8,8 +8,17 @@ namespace FBDTemp.Model
 {
   public abstract class InputAlgoritm : IAlgoritmModel
     {
-      public Dictionary<string, object> output;
-        
+     
+      private object _output;
+      public object Output 
+      { 
+          get { return _output; }
+          protected set 
+          { 
+              if(_output==null) _output = new object();
+              _output = value;
+          }
+      }
         public virtual void Run()
         {
             
@@ -18,14 +27,18 @@ namespace FBDTemp.Model
         public object VisualContent
         {
             get { return _visualContent; }
+            protected set
+            {
+                if (_visualContent == null) _visualContent = new object();
+                _visualContent = value; 
+            }
         }
         protected string _algoritmname;
         public string AlgoritmName
         {
-            get
-            {
-                return _algoritmname;
-            }
+            get { return _algoritmname; }
+            set { _algoritmname = value; }
+            
             
         }
         public event EventHandler AlgoritmCalculated = delegate { };

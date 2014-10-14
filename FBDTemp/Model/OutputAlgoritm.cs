@@ -8,12 +8,15 @@ namespace FBDTemp.Model
 {
  public abstract  class OutputAlgoritm : IAlgoritmModel
     {
-       
-       
-     public Dictionary<string, object> input;
+
+     private object _input;  
+     public object Input
+     {
+         get { return _input; }
+     }
      
      #region IBlockAlgoritm
-     public void Run()
+     public virtual void Run()
      {
 
      }
@@ -21,12 +24,19 @@ namespace FBDTemp.Model
      public object VisualContent
      {
          get { return _visualContent; }
+         private set
+         {
+             if (_visualContent == null) _visualContent = new object();
+             _visualContent = value;
+         }
      }
-    
      protected string _algoritmname;
      public string AlgoritmName
-     { 
-         get { return _algoritmname; } 
+     {
+         get { return _algoritmname; }
+         set { _algoritmname = value; }
+
+
      }
      
      public event EventHandler AlgoritmCalculated = delegate { };

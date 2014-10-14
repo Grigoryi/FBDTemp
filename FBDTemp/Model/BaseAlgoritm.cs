@@ -6,12 +6,46 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
-  public abstract  class BaseAlgoritm : InputAlgoritm
+  public abstract  class BaseAlgoritm : IAlgoritmModel
     {
-      public Dictionary<string, object> input;
+      private object _output;
+      public object Output
+      {
+          get { return _output; }
+          private set
+          {
+              if (_output == null) _output = new object();
+              _output = value;
+          }
+      }
+      #region IAlgoritmModel
+      public virtual void Run()
+      {
 
-  
-     
+      }
+      private object _visualContent;
+      public object VisualContent
+      {
+          get { return _visualContent; }
+          protected set
+          {
+              if (_visualContent == null) _visualContent = new object();
+              _visualContent = value;
+          }
+      }
+      protected string _algoritmname;
+      public string AlgoritmName
+      {
+          get { return _algoritmname; }
+          protected set { _algoritmname = value; }
+
+
+      }
+      public event EventHandler AlgoritmCalculated = delegate { };
+
+      #endregion
+
+
 
     }
 }

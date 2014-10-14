@@ -11,7 +11,7 @@ namespace FBDTemp.Model
        //Запускает расчет алгоритма
        void Run();
        //Визуальное отображение на блоке
-       object VisualContent {get;}
+       object VisualContent { get; }
        string AlgoritmName { get;}
 
        event EventHandler AlgoritmCalculated;
