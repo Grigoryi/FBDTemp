@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FBDTemp.ViewModel
+namespace FBDTemp.Controls
 {
-    class BaseBlockViewModel
+   public class DesignerCanvas
     {
     }
 }

@@ -9,7 +9,12 @@ namespace FBDTemp.Model
 {
   public abstract  class CompositionAlgoritm: BaseAlgoritm
     {
-      public Dictionary<string, object> input;
+      private ICollection<IBlockModel> _blocks;
+      public ICollection<IBlockModel> Blocks
+      { 
+          get { return _blocks; }
+          set { _blocks = value; }
+      }
       
       
     }

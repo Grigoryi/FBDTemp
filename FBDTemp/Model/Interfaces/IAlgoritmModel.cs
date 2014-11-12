@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FBDTemp.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,14 @@ namespace FBDTemp.Model
        //Визуальное отображение на блоке
        object VisualContent { get; }
        string AlgoritmName { get;}
+       object Parametrs { get; set; }
+       object GetInput();
+       object GetOutput();
+       IBlockModel Block { get; set; }
+      // void UpdateAlgoritm(IAlgoritmModel algoritm);
 
+
+       event EventHandler<AlgoritmEventArgs> AlgoritmUpdated;
        event EventHandler AlgoritmCalculated;
     }
 }

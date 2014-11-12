@@ -11,10 +11,21 @@ namespace FBDTemp.Model
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        protected void NotifyPropertyChanged(
-            string propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public virtual void NotifyChanged(params string[] propertyNames)
+        {
+            foreach (string name in propertyNames)
+                OnPropertyChanged(new PropertyChangedEventArgs(name));
+        }
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, e);
+            }
         }
     }
 }
