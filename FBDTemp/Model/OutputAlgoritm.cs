@@ -7,31 +7,10 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
- public abstract  class OutputAlgoritm : IAlgoritmModel
+ public abstract  class OutputAlgoritm : IIOAlgoritm
     {
      
-     protected IBlockModel _block;
-     public IBlockModel Block
-     {
-         get { return _block; }
-         set
-         {
-             if (_block != value) _block = value;
-         }
-     }
-     protected object _input;
-     public object Input
-     {
-         get { return _input; }
-         set 
-         {
-             if (_input == value) return;
-             _input = value;
-             AlgoritmUpdated(this, new AlgoritmEventArgs(this));
-         
-         }
-     
-     }
+        
     protected IConnectionModel _connection;
     public IConnectionModel Connection 
      {
@@ -59,7 +38,7 @@ namespace FBDTemp.Model
      public string AlgoritmName
      {
          get { return _algoritmName; }
-        // set { _algoritmname = value; }
+         set { _algoritmName = value; }
 
          
      }
@@ -74,16 +53,23 @@ namespace FBDTemp.Model
          get { return _parametrs; }
          set { _parametrs = value; }
      }
+     
+     public object _input;
 
-     public object GetInput()
+     public void SetValue(object val)
+     {
+         if (_input == val) return;
+         _input = val;
+         AlgoritmUpdated(this, new AlgoritmEventArgs(this));
+         
+     }
+
+     public object GetValue()
      {
          return _input;
      }
-  
-     public object GetOutput()
-     {
-         return null;
-     }
+     public IConnectorModel _context { get; private set; }
+    
      #endregion
 
 

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model.Interfaces
 {
-    interface IIOAlgoritm : IAlgoritmModel
+  public  interface IIOAlgoritm : IAlgoritmModel
     {
-      //  void SetOutput(int pos, object value);
-        void SetInput(int pos, object value);
+       void SetValue(object var);
+       object GetValue();
+       IConnectorModel _context {get;}
     }
 }

@@ -128,6 +128,8 @@
     <Compile Include="ViewModel\SelectableBlockViewModel.cs" />
     <Compile Include="ViewModel\SimpleBaseViewModel.cs" />
     <Compile Include="ViewModel\BlockViewModel.cs" />
+    <Compile Include="ViewModel\SimpleIOBaseViewModel.cs" />
+    <Compile Include="ViewModel\WindowViewModel.cs" />
     <Compile Include="View\BaseBlockView.xaml.cs">
       <DependentUpon>BaseBlockView.xaml</DependentUpon>
     </Compile>
@@ -148,6 +150,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Styles\DesignerItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\ScroolViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\SimpleBaseDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

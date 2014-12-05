@@ -16,10 +16,10 @@ using System.Windows.Input;
 
 namespace FBDTemp.ViewModel
 {
-  public  class SimpleBaseViewModel: INotifyPropertyChanged
+  public  class SimpleBaseViewModel: DesignerBlockViewModel
     {
      
-      private readonly IAlgoritmModel _model;
+      private readonly IResizableAlg _model;
       #region Commands
       private ICommand _addInputCommand;
       public ICommand AddInputCommand
@@ -36,21 +36,20 @@ namespace FBDTemp.ViewModel
 
       private bool CanAddInput(object obj)
       {
-          if (_model is IResizableAlg)
-          {
-              var mod = (IResizableAlg)_model;
-              if (Input.Count >= mod.MaxCountInput ||
-                  (mod.CountInpEqualCountOutp && Output.Count == mod.MaxCountOutput)) return false;
+
+
+          if (Input.Count >= _model.MaxCountInput ||
+                  (_model.CountInpEqualCountOutp && Output.Count == _model.MaxCountOutput)) return false;
               else return true;
-          } else return false;
+          
          
           
       }
       private void AddInput(object parameter)
       {
-          var mod = (IResizableAlg)_model;
-          mod.AddInput();
-             if (mod.CountInpEqualCountOutp) mod.AddOutput();
+
+          _model.AddInput();
+          if (_model.CountInpEqualCountOutp) _model.AddOutput();
            
          // UpdateBlock();
       }
@@ -68,87 +67,112 @@ namespace FBDTemp.ViewModel
       }
       private void RemoveInput(object parameter)
       {
-          (_model as IResizableAlg).RemoveInput(Input.Count - 1);
+          _model.RemoveInput(Input.Count - 1);
       } 
       private bool CanRemoveInput(object obj)
       {
-          if (_model is IResizableAlg) 
-          {
-              var mod = (IResizableAlg)_model;
+          
              // if(mod.CountInpEqualCountOutp && (mod.In))
-              if (Input[Input.Count - 1].CanDelete()) return true; ///пока так, потом надо добавить условий
-              return true;
-          }
-          else return false;
+              if (!Input[Input.Count - 1]._model._context.IsNeed ) return true; ///пока так, потом надо добавить условий
+              else return false;
+          
+          
       }
 
       #endregion
 
 
 
-      public ObservableCollection<SimpleOutputAlgoritm> Input
-      { get { return  (ObservableCollection<SimpleOutputAlgoritm>)_model.GetInput(); } }
+      public ObservableCollection<SimpleIOBaseViewModel> Input
+      {
+          get;
+          set;
+      }
 
-      public ObservableCollection<SimpleInputAlgoritm> Output
-      { get { return (ObservableCollection<SimpleInputAlgoritm>)_model.GetOutput(); } }
+      public ObservableCollection<SimpleIOBaseViewModel> Output
+      {
+          get;
+          set;
+      }
 
       public string Name
       { get { return _model.AlgoritmName; } }
 
-      public SimpleBaseViewModel(IAlgoritmModel algoritm, Guid id)
+      //конструктор для создания отдельного блока
+      public SimpleBaseViewModel(BaseAlgoritm algoritm, Guid id)
       {
           _model = algoritm;
-          _model.Block = new BaseBlock(algoritm, id);
-          _model.AlgoritmUpdated+=_model_AlgoritmUpdated;
-        
+          _id = id;
+        //  _model.AlgoritmUpdated+=_model_AlgoritmUpdated;
+          Init();
         
       }
-
-      private void _model_AlgoritmUpdated(object sender, AlgoritmEventArgs e)
+      
+      public SimpleBaseViewModel(int id, DiagramViewModel parent, double left, double top, BaseAlgoritm algoritm)
+          : base(id,parent,left,top)
       {
-          
+          _model = algoritm;
+          Init();
       }
-
-
-
 
       private Guid _id;
       public Guid ID
       {
           get
           {
-             return _model.Block.ID;
+             return _id;
           }
           set
           {
-              _model.Block.ID = value;
-              PropertyChanged(this, new PropertyChangedEventArgs("ID"));
+             if(_id != value)
+              _id = value;
+             // PropertyChanged(this, new PropertyChangedEventArgs("ID"));
+              NotifyChanged("ID");
+          }
+      }
+      private void Init()
+      {
+          if (_model.MinCountOutput > 0)
+          {
+              Output = new ObservableCollection<SimpleIOBaseViewModel>();
+              for (int i = 0; i < _model.MinCountOutput; i++)
+              {
+                  Output.Add(new SimpleIOBaseViewModel(new SimpleInputAlgoritm(), i + 1));
+              }
+          }
+          if (_model.MinCountInput > 0)
+          {
+              Input = new ObservableCollection<SimpleIOBaseViewModel>();
+              for (int i = 0; i < _model.MinCountInput; i++)
+              {
+                  Input.Add(new SimpleIOBaseViewModel(new SimpleOutputAlgoritm(), i + 1));
+              }
           }
       }
 
      
       #region NotifyPropertyChanged
-      public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-      protected virtual void OnPropertyChanged(string propertyName)
-      {
-          this.VerifyPropertyName(propertyName);
-          PropertyChangedEventHandler handler = this.PropertyChanged;
-          if (handler != null)
-          {
-              var e = new PropertyChangedEventArgs(propertyName);
-              handler(this, e);
-          }
-      }
-      [Conditional("Debug")]
-      [DebuggerStepThrough]
-      public void VerifyPropertyName(string propertyName)
-      {
-          if (TypeDescriptor.GetProperties(this)[propertyName] == null)
-          {
-              string msg = "Invalid property name: " + propertyName;
-              Debug.Fail(msg);
-          }
-      }
+      //public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+      //protected virtual void OnPropertyChanged(string propertyName)
+      //{
+      //    this.VerifyPropertyName(propertyName);
+      //    PropertyChangedEventHandler handler = this.PropertyChanged;
+      //    if (handler != null)
+      //    {
+      //        var e = new PropertyChangedEventArgs(propertyName);
+      //        handler(this, e);
+      //    }
+      //}
+      //[Conditional("Debug")]
+      //[DebuggerStepThrough]
+      //public void VerifyPropertyName(string propertyName)
+      //{
+      //    if (TypeDescriptor.GetProperties(this)[propertyName] == null)
+      //    {
+      //        string msg = "Invalid property name: " + propertyName;
+      //        Debug.Fail(msg);
+      //    }
+      //}
       #endregion
     }
 }

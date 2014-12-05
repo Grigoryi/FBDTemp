@@ -115,15 +115,7 @@ namespace FBDTemp.Model
       {
           return _outputs;
       }
-      private IBlockModel _block;
-      public IBlockModel Block
-      {
-          get { return _block; }
-          set 
-          {
-              if (_block != value) _block = value;
-          }
-      }
+     
       #endregion
 
        //минимальное/максимальное количество входов/выходов

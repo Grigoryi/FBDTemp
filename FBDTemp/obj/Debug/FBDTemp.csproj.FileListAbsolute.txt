@@ -55,3 +55,6 @@ E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\FBDTemp_MarkupCompile.lref
 E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\Controls\DiagramControl.baml
 E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\Resources\Styles\DesignerItem.baml
+E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\Resources\Styles\SimpleBaseDataTemplate.baml
+E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\Resources\Styles\ScroolViewer.baml
+E:\GitRepository\FBDTemp\FBDTemp\obj\Debug\App.baml

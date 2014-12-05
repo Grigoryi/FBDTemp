@@ -15,9 +15,8 @@ namespace FBDTemp.Model
        object VisualContent { get; }
        string AlgoritmName { get;}
        object Parametrs { get; set; }
-       object GetInput();
-       object GetOutput();
-       IBlockModel Block { get; set; }
+       
+      // IBlockModel Block { get; set; }
       // void UpdateAlgoritm(IAlgoritmModel algoritm);
 
 

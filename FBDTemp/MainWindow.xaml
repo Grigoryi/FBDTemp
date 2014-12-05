@@ -1,8 +1,9 @@
 ﻿<Window x:Class="FBDTemp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:FBDTemp.Controls" 
         Title="MainWindow" Height="350" Width="525">
-    <Canvas Name="Grid1">
-        
-    </Canvas>
+    <Grid Name="Grid1">
+        <c:DiagramControl Margin="0" DataContext="{Binding DiagramViewModel}"/>
+    </Grid>
 </Window>

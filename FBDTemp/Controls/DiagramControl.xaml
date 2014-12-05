@@ -32,22 +32,25 @@
                                     Value="True" />
                             <Setter Property="Width"
                                     Value="{x:Static  vm:DesignerBlockViewModel.ItemWidth}" />
-                            <Setter Property="Height"
-                                    Value="{x:Static  vm:DesignerBlockViewModel.ItemHeight}" />
+                          <!--  <Setter Property="Height"
+                                    Value="{x:Static  vm:DesignerBlockViewModel.ItemHeight}" /> -->
                             <Setter Property="SnapsToDevicePixels"
                                     Value="True" />
                             <Setter Property="ContentTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
                                         <Grid x:Name="selectedGrid">
-                                            <c:DragThumb x:Name="PART_DragThumb"
-                                                            Cursor="SizeAll" />
+                                           
+                                          <c:DragThumb x:Name="PART_DragThumb"
+                                                            Cursor="SizeAll"
+                                                        />
                                             <ContentPresenter x:Name="PART_ContentPresenter"
                                                                 HorizontalAlignment="Stretch"
                                                                 VerticalAlignment="Stretch"
-                                                                Content="{TemplateBinding Content}" />
+                                                                Content="{TemplateBinding Content}" /> 
+                                            
                                         </Grid>
-                                        <DataTemplate.Triggers>
+                                   <!--     <DataTemplate.Triggers>
                                             <DataTrigger Value="True"
                                                             Binding="{Binding IsSelected}">
                                                 <Setter TargetName="selectedGrid"
@@ -55,12 +58,12 @@
                                                     <Setter.Value>
                                                         <DropShadowEffect BlurRadius="30"
                                                                             ShadowDepth="0"
-                                                                            Color="Red"
+                                                                            Color="Green"
                                                                             Opacity="1.0" />
                                                     </Setter.Value>
                                                 </Setter>
                                             </DataTrigger>
-                                        </DataTemplate.Triggers>
+                                        </DataTemplate.Triggers> -->
                                     </DataTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -177,6 +180,12 @@
                             </Setter>
                         </Style>
                     </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas MinHeight="800" MinWidth="800"
+                                    Background="Wheat" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </ScrollViewer>
         </Grid>

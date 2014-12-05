@@ -25,23 +25,36 @@ namespace FBDTemp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private WindowViewModel _windowViewModel;
         public MainWindow()
         {
             InitializeComponent();
-            //BaseAlgoritm a = new BaseAlgoritm();
-            //if (a is IAlgoritmModel) MessageBox.Show("Yes");
-            //MessageBox.Show(a.GetType().ToString());
+            _windowViewModel = new WindowViewModel();
+            this.DataContext = _windowViewModel;
+            this.Loaded += MainWindow_Loaded;
+
+           
+           // Grid1.Children.Add(bbv);
             
-          //  Type _typeOutput; ;
-         //   MessageBox.Show(_typeOutput.ToString());
-           // double d;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             SumAlgoritm sa = new SumAlgoritm(typeof(double));
             sa.Run();
-            SimpleBaseViewModel sbvm = new SimpleBaseViewModel(sa,new Guid());
-            //MessageBox.Show(sa.Outputs[0].Output.ToString());
-            BaseBlockView bbv = new BaseBlockView();
-            bbv.DataContext = sbvm;
-            Grid1.Children.Add(bbv);
+            SimpleBaseViewModel sbvm = new SimpleBaseViewModel(1, _windowViewModel.DiagramViewModel, 15,20,sa);
+          
+            _windowViewModel.DiagramViewModel.Items.Add(sbvm);
+
+           
+            SimpleBaseViewModel sbvm1 = new SimpleBaseViewModel(3, _windowViewModel.DiagramViewModel, 15, 20, sa);
+
+            _windowViewModel.DiagramViewModel.Items.Add(sbvm1);
+
+            SimpleOutputAlgoritm sia = new SimpleOutputAlgoritm(typeof(double));
+            SimpleIOBaseViewModel siobvm = new SimpleIOBaseViewModel(2, _windowViewModel.DiagramViewModel, 50, 50, sia);
+            _windowViewModel.DiagramViewModel.Items.Add(siobvm);
+           
             
         }
     }

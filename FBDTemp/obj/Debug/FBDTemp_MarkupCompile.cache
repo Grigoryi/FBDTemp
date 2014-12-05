@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\GitRepository\FBDTemp\FBDTemp\App.xaml
-4-1649692311
+6809204866
 
-54-1270918600
+56791411126
 70607130534
-Controls\DiagramControl.xaml;MainWindow.xaml;Resources\Styles\DesignerItem.xaml;View\BaseBlockView.xaml;
+Controls\DiagramControl.xaml;MainWindow.xaml;Resources\Styles\DesignerItem.xaml;Resources\Styles\ScroolViewer.xaml;Resources\Styles\SimpleBaseDataTemplate.xaml;View\BaseBlockView.xaml;
 
 False
 
