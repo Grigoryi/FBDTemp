@@ -72,6 +72,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPG">
+      <HintPath>..\..\..\Visual Studia Project\PropertiesGridWPF\WPG\bin\Debug\WPG.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -83,13 +86,17 @@
     <Compile Include="AttachedProperties\SelectionProps.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\SimpleCommand.cs" />
+    <Compile Include="Controls\Connector.cs" />
     <Compile Include="Controls\DesignerCanvas.cs" />
     <Compile Include="Controls\DiagramControl.xaml.cs">
       <DependentUpon>DiagramControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DragThumb.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ConnectionPathConverter.cs" />
+    <Compile Include="Converters\ConOrientHorAlignmConverter.cs" />
+    <Compile Include="Converters\ConOrientstionVertAligmConverter.cs" />
     <Compile Include="Converters\ImageUrlConverter.cs" />
     <Compile Include="Helpers\ConnectorInfo.cs" />
     <Compile Include="Helpers\ConnectorInfoBase.cs" />
@@ -99,9 +106,13 @@
     <Compile Include="Helpers\OrthogonalPathFinder.cs" />
     <Compile Include="Helpers\PartCreatedConnectionInfo.cs" />
     <Compile Include="Helpers\PointHelper.cs" />
+    <Compile Include="Helpers\RubberbandAdorner.cs" />
+    <Compile Include="Helpers\SizeAdorner.cs" />
     <Compile Include="Helpers\WeakINPCEventHandler.cs" />
     <Compile Include="IGroupable.cs" />
     <Compile Include="ISelectable.cs" />
+    <Compile Include="Model\Algoritms\GraphicOutput.cs" />
+    <Compile Include="Model\Algoritms\MethodTagaevskoyAlgoritm.cs" />
     <Compile Include="Model\Algoritms\SimpleOutputAlgoritm.cs" />
     <Compile Include="Model\Algoritms\SimpleInputAlgoritm.cs" />
     <Compile Include="Model\Algoritms\SumAlgoritm.cs" />
@@ -114,14 +125,19 @@
     <Compile Include="Model\Interfaces\IBlockModel.cs" />
     <Compile Include="Model\Interfaces\IConnectionModel.cs" />
     <Compile Include="Model\InputAlgoritm.cs" />
-    <Compile Include="Model\Interfaces\IConnectorModel.cs" />
+    <Compile Include="Model\Interfaces\ContextModel.cs" />
     <Compile Include="Model\Interfaces\IDiagramViewModel.cs" />
     <Compile Include="Model\Interfaces\IIOAlgoritm.cs" />
     <Compile Include="Model\Interfaces\IResizableAlg.cs" />
     <Compile Include="Model\Interfaces\IStateBlockModel.cs" />
+    <Compile Include="Model\Interfaces\IUIVisualiserService.cs" />
     <Compile Include="Model\Notifier.cs" />
     <Compile Include="Model\OutputAlgoritm.cs" />
-    <Compile Include="Resources\Styles\DesignerItemsControlStyleSelector.cs" />
+    <Compile Include="View\DesignerItemsControlStyleSelector.cs" />
+    <Compile Include="Services\SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SimpleUIVisualizerService.cs" />
     <Compile Include="ViewModel\ConnectorViewModel.cs" />
     <Compile Include="ViewModel\DesignerBlockViewModel.cs" />
     <Compile Include="ViewModel\DiagramViewModel.cs" />
@@ -149,7 +165,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\Styles\DesignerItem.xaml">
+    <Page Include="View\DesignerItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,7 +173,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Styles\SimpleBaseDataTemplate.xaml">
+    <Page Include="View\SimpleBaseDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Services\SettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
