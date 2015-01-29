@@ -1,5 +1,6 @@
 ﻿using FBDTemp.Model;
 using FBDTemp.Model.Algoritms;
+using FBDTemp.Services;
 using FBDTemp.View;
 using FBDTemp.ViewModel;
 using System;
@@ -40,22 +41,30 @@ namespace FBDTemp
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            SumAlgoritm sa = new SumAlgoritm(typeof(double));
-            sa.Run();
+            SumAlgoritm sa = new SumAlgoritm(typeof(double)); 
+           // sa.Run();
             SimpleBaseViewModel sbvm = new SimpleBaseViewModel(1, _windowViewModel.DiagramViewModel, 15,20,sa);
-          
-            _windowViewModel.DiagramViewModel.Items.Add(sbvm);
-
+           // _windowViewModel.DiagramViewModel.Items.Add(sbvm);
+            _windowViewModel.DiagramViewModel.AddItemCommand.Execute(sbvm);
            
-            SimpleBaseViewModel sbvm1 = new SimpleBaseViewModel(3, _windowViewModel.DiagramViewModel, 15, 20, sa);
-
-            _windowViewModel.DiagramViewModel.Items.Add(sbvm1);
-
-            SimpleOutputAlgoritm sia = new SimpleOutputAlgoritm(typeof(double));
-            SimpleIOBaseViewModel siobvm = new SimpleIOBaseViewModel(2, _windowViewModel.DiagramViewModel, 50, 50, sia);
-            _windowViewModel.DiagramViewModel.Items.Add(siobvm);
            
+
+            SimpleOutputAlgoritm sia = new SimpleOutputAlgoritm();
+            SimpleIOBaseViewModel siobvm = new SimpleIOBaseViewModel(2, _windowViewModel.DiagramViewModel, 200, 150, sia);
             
+            _windowViewModel.DiagramViewModel.Items.Add(siobvm);
+
+            SimpleInputAlgoritm sia1 = new SimpleInputAlgoritm(); 
+            SimpleIOBaseViewModel siobvm2 = new SimpleIOBaseViewModel(3, _windowViewModel.DiagramViewModel, 100, 150, sia1);
+            _windowViewModel.DiagramViewModel.Items.Add(siobvm2); sia.SetValue(5);
+
+            ConnectorViewModel con1 = new ConnectorViewModel(siobvm2.connector, siobvm.connector);
+            con1.Parent = _windowViewModel.DiagramViewModel;
+            _windowViewModel.DiagramViewModel.Items.Add(con1);
+
+          //  SimpleUIVisualizerService suivs = new SimpleUIVisualizerService();
+          //  suivs.ShowDialog(sa.Parametrs);
+           
         }
     }
 }

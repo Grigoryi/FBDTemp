@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FBDTemp
+namespace FBDConfigurator.Interfaces
 {
-    public interface ISelectable
+  public interface ICollectionService : IModuleService
     {
-        bool IsSelected { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model
 {
- public abstract  class OutputAlgoritm : IIOAlgoritm
+ public  class OutputAlgoritm<T> : IIOAlgoritm<T>
     {
      
         
@@ -17,17 +17,53 @@ namespace FBDTemp.Model
          get { return _connection; } 
          set 
          {
-             if (_connection != null || _connection == value) return;
+             if (_connection == value) return;
+             //нужна проверка на соответсвие типов данных
              _connection = value;
-             AlgoritmUpdated(this,new AlgoritmEventArgs(this));
+             AlgoritmUpdated(this,new AlgoritmEventArgs(this,CommandType.None));
          } 
      }
-     
-     #region IBlockAlgoritm
-     public virtual void Run()
+    
+ 
+    private bool _isInverse;
+    public bool IsInverse
+    {
+        get { return _isInverse; }
+        set { _isInverse = value; }
+
+    }
+
+    #region Ctors
+     public OutputAlgoritm()
+       {
+         
+           _algoritmName = "Вход";
+           _visualContent = AlgoritmName;
+           Init();
+       }
+   
+       public OutputAlgoritm( string name, T obj)
+       {
+            _algoritmName = name;
+            _visualContent = AlgoritmName;
+            _input = obj;
+            Init();
+        }
+    #endregion
+     private void Init()
+       {
+           _parametrs = new SettingCollection(this);
+       }
+    #region IIOAlrotitm inherit
+    public virtual void Run()
      {
-         AlgoritmCalculated(this, new EventArgs());   ///событие должно привязаться к соединению, чтобы соединяемый вход блока поменял свое значение
+         AlgoritmCalculated(this, new EventArgs());   
      }
+     public virtual void Reset()
+    {
+        
+    }
+     
      protected object _visualContent;
      public object VisualContent
      {
@@ -39,38 +75,46 @@ namespace FBDTemp.Model
      {
          get { return _algoritmName; }
          set { _algoritmName = value; }
-
-         
+     
      }
     
      public event EventHandler AlgoritmCalculated = delegate { };
      public event EventHandler<AlgoritmEventArgs> AlgoritmUpdated = delegate { };
-     
 
-     private object _parametrs;
-     public object Parametrs
+
+     private SettingCollection _parametrs;
+     public SettingCollection Parametrs
      {
          get { return _parametrs; }
          set { _parametrs = value; }
      }
      
-     public object _input;
+     protected T _input;
 
-     public void SetValue(object val)
+     public virtual T GetValue()
      {
-         if (_input == val) return;
-         _input = val;
-         AlgoritmUpdated(this, new AlgoritmEventArgs(this));
+          return _input; }
+    
+     public virtual void SetValue(T val)
+       {
+           if (_input != null)
+           {
+               if (!_input.Equals(val))
+               {
+                   _input = val;
+                   AlgoritmUpdated(this, new AlgoritmEventArgs(this, CommandType.None));
+               }
+           }
+           else
+           {
+               _input = val;
+               AlgoritmUpdated(this, new AlgoritmEventArgs(this, CommandType.None));
+           }
          
      }
-
-     public object GetValue()
-     {
-         return _input;
-     }
-     public IConnectorModel _context { get; private set; }
+#endregion
     
-     #endregion
+     
 
 
 

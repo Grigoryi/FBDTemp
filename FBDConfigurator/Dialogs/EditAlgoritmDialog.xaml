@@ -1,0 +1,8 @@
+﻿<Window x:Class="FBDConfigurator.Dialogs.EditAlgoritmDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EditAlgoritmDialog" MaxWidth="300" MinWidth="300">
+    <Grid>
+        
+    </Grid>
+</Window>

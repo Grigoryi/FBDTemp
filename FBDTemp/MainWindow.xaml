@@ -2,8 +2,76 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:FBDTemp.Controls" 
-        Title="MainWindow" Height="350" Width="525">
-    <Grid Name="Grid1">
-        <c:DiagramControl Margin="0" DataContext="{Binding DiagramViewModel}"/>
-    </Grid>
+        xmlns:s="clr-namespace:FBDTemp.Converters"
+        Title="FBDTemp" 
+        SnapsToDevicePixels="True"
+        WindowState="Maximized">
+    <Window.InputBindings>
+        <KeyBinding Key="Delete" Command="{Binding DeleteSelectedItemsCommand}" />
+    </Window.InputBindings>
+
+    <DockPanel Margin="0">
+        <Menu DockPanel.Dock="Top" Height="25" Padding="2">
+            <MenuItem Header="Файл"  >
+                <MenuItem Header="Создать.." >
+                    <MenuItem Header="Новый лист" Command="{Binding CreateNewDiagramCommand}" />
+                    <MenuItem Header="Новый проект" />
+                </MenuItem>
+                <MenuItem Header="Открыть" Command="{Binding LoadDiagramCommand}" />
+                <MenuItem Header="Сохранить как" Command="{Binding SaveDiagramCommand}" />
+                <MenuItem Header="Сохранить" />
+                <MenuItem Header="Выход" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            <MenuItem Header="Блоки">
+                <MenuItem Header="Алгебраические"/>
+                <MenuItem Header="Логические" />
+                <MenuItem Header="Линейные" />
+            </MenuItem>
+
+        </Menu>
+        <ToolBar Height="35" DockPanel.Dock="Top">
+            <Label Margin="10,0,3,0"
+                   VerticalAlignment="Center"
+                   Content="Saved Diagrams" />
+            <ComboBox Margin="8,0,3,0"
+                     Width="200"
+                     ToolTip="Saved Diagrams"
+                      SelectedItem="{Binding SavedDiagramId}"
+                     ItemsSource="{Binding SavedDiagrams}"/>
+            <Button ToolTip="Load Selected Diagram"
+                    Content="Load"
+                    Margin="8,0,3,0"
+                    Command="{Binding LoadDiagramCommand}" />
+            <ProgressBar Margin="8,0,3,0"
+                         Visibility="{Binding Path=IsBusy, Converter={x:Static s:BoolToVisibilityConverter.Instance}}"
+                         IsIndeterminate="True"
+                         Width="150"
+                         Height="20"
+                         VerticalAlignment="Center" />
+
+        </ToolBar>
+
+
+        <Grid Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+                <!-- ToolBox Control -->
+                <c:ToolBoxControl Grid.Column="0"
+                                  DataContext="{Binding ToolBoxViewModel}" />
+
+            <GridSplitter Grid.Column="1"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Stretch"
+						  Background="Transparent"
+						  Width="3" />
+
+            <!-- Diagram Control -->
+            <c:DiagramControl Margin="0" Grid.Column="1" DataContext="{Binding DiagramViewModel}"/>
+        </Grid>
+        
+        
+    </DockPanel>
 </Window>

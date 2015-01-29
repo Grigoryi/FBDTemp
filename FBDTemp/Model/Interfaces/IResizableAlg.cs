@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model.Interfaces
 {
-  public  interface IResizableAlg : IAlgoritmModel
+  public  interface IResizableAlg 
     {
-        void AddInput();
-        void AddOutput();
-        void RemoveInput(int position);
-        void RemoveOutput(int position);
+        SimpleOutputAlgoritm AddInput();
+        bool CanAddInput();
+        SimpleOutputAlgoritm RemoveInput(int position);
+        SimpleOutputAlgoritm RemoveInput(SimpleOutputAlgoritm item);
+        bool CanRemoveInput(int position);
+        bool CanRemoveInput(SimpleOutputAlgoritm item);
 
-        int MinCountInput { get;  set; }
-        int MinCountOutput { get; set; }
-        int MaxCountInput { get;  set; }
-        int MaxCountOutput { get; set; }
-
-        bool CountInpEqualCountOutp { get;  set; }
+        
     }
 }

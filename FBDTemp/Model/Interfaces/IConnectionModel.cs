@@ -8,15 +8,15 @@ namespace FBDTemp.Model
 {
    public interface IConnectionModel
     {
-       InputAlgoritm From { get; }
-      // int FromPort { get; }
+       InputAlgoritm<object> From { get; }
+       int FromPort { get; }
 
-       OutputAlgoritm To { get; }
-     //  int ToPort { get; }
+       OutputAlgoritm<object> To { get; }
+       int ToPort { get; }
       
        object Value { get; }
       
-       Guid ID { get; }
+       int ID { get; }
 
       
     }

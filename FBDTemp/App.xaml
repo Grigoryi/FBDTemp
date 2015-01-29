@@ -2,8 +2,8 @@
   <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/DesignerItem.xaml" />
-                <ResourceDictionary Source="Resources/Styles/SimpleBaseDataTemplate.xaml" />
+                <ResourceDictionary Source="View/DesignerItem.xaml" />
+                <ResourceDictionary Source="View/SimpleBaseDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
   </Application.Resources>

@@ -11,10 +11,11 @@ namespace FBDTemp.Model
     {
        //Запускает расчет алгоритма
        void Run();
+       void Reset();
        //Визуальное отображение на блоке
        object VisualContent { get; }
        string AlgoritmName { get;}
-       object Parametrs { get; set; }
+       SettingCollection Parametrs { get; set; }
        
       // IBlockModel Block { get; set; }
       // void UpdateAlgoritm(IAlgoritmModel algoritm);

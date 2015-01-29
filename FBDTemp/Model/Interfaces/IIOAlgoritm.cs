@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace FBDTemp.Model.Interfaces
 {
-  public  interface IIOAlgoritm : IAlgoritmModel
+  public  interface IIOAlgoritm<T> : IAlgoritmModel
     {
-       void SetValue(object var);
-       object GetValue();
-       IConnectorModel _context {get;}
+       //void SetValue(object var);
+      T GetValue();
+      void SetValue(T value);
+
+      //Type TypeValue { get; set; }
+      // IContextModel _context {get;}
     }
 }

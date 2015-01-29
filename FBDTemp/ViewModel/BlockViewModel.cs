@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace FBDTemp.ViewModel
 {
-    public class BlockViewModel : ContentControl, ISelectable, IGroupable
+    public class BlockViewModel : ContentControl
     {
 
         #region ID

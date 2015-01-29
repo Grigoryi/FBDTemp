@@ -10,7 +10,7 @@ namespace FBDTemp.Helpers
 {
   public  class OrthogonalPathFinder : IPathFinder
     {
-        private const int margin = 20;
+        private const int margin = 10;
 
         public List<Point> GetConnectionLine(ConnectorInfo source, ConnectorInfo sink, bool showLastLine)
         {
