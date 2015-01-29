@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FBDConfigurator.Dialogs
+namespace FBDConfigurator.Controls
 {
     /// <summary>
-    /// Interaction logic for AlgoritmCollection.xaml
+    /// Interaction logic for BlockCollection.xaml
     /// </summary>
-    public partial class AlgoritmCollection 
+    public partial class BlockCollection 
     {
-        public AlgoritmCollection()
+        public BlockCollection()
         {
             InitializeComponent();
         }

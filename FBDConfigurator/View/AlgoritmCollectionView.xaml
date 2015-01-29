@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:FBDConfigurator.Model"
+                    xmlns:Converters="clr-namespace:FBDTemp.Converters;assembly=FBDTemp"
+                    xmlns:Controls="clr-namespace:FBDTemp.Controls;assembly=FBDTemp">
+    <Style TargetType="{x:Type vm:AlgoritmCollectionModel}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type vm:AlgoritmCollectionModel}">
+                    <ControlTemplate.Resources>
+                        <Converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                        <Converters:InvertConverter x:Key="InvertConverter" />
+                    </ControlTemplate.Resources> 
+                    
+                    <TabItem DataContext="{Binding ViewModel}">
+                         <TabItem.Header>
+                            <StackPanel Style="{StaticResource HorisontalStackPanelStyle}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource ToolBarTextBlockStyle}"/>
+                                <TextBlock Text="*" Style="{StaticResource ToolBarTextBlockStyle}" Visibility="{Binding Path=HasChanges, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid IsEnabled="{Binding Path=InProgress, Converter={StaticResource InvertConverter}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ToolBar>
+                                <Button Command="{Binding Path=ReloadCommand}" ToolTip="Reload">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"  />
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Reload" />
+                                    </StackPanel>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding Path=SaveCommand}" ToolTip="">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"  />
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Save" />
+                                    </StackPanel>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding Path=AddCommand}" ToolTip="Add">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"  />
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Add" />
+                                    </StackPanel>
+                                </Button>
+                                <Button Command="{Binding Path=EditCommand}" ToolTip="Edit">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"  />
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Edit" />
+                                    </StackPanel>
+                                </Button>
+                                <Button Command="{Binding Path=DeleteCommand}" ToolTip="Delete">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"/>
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Delete" />
+                                    </StackPanel>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding Path=CopyCommand}" ToolTip="Copy">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"/>
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Copy" />
+                                    </StackPanel>
+                                </Button>
+                                <Button Command="{Binding Path=PasteCommand}" ToolTip="Paste">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}" />
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Paste" />
+                                    </StackPanel>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding Path=UnselectCommand}" ToolTip=".Unselect">
+                                    <StackPanel Style="{StaticResource HorizontalStackPanelStyle}">
+                                        <Image Style="{StaticResource SmallImageStyle}"/>
+                                        <TextBlock Style="{StaticResource ToolBarTextBlockStyle}" Text="Unselect" />
+                                    </StackPanel>
+                                </Button>
+                            </ToolBar>
+                            <DataGrid Grid.Row="1" Style="{StaticResource ModuleDataGridStyle}" ItemsSource="{Binding Path=Collection}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Controls:DataGridBehavior.SelectedItems="{Binding Path=SelectedItems}" Controls:DataGridBehavior.ControlCCommand="{Binding Path=CopyCommand}" Controls:DataGridBehavior.ControlVCommand="{Binding Path=PasteCommand}">
+                                <DataGrid.Resources>
+                                    <Style x:Key="DataGridTextBlockStyleWithToolTip" TargetType="TextBlock" BasedOn="{StaticResource DataGridTextBlockStyle}">
+                                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="" Binding="{Binding Path=name, Mode=TwoWay, ValidatesOnDataErrors=True}" EditingElementStyle="{StaticResource DataGridTextBoxStyle}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                                    <DataGridTextColumn Header="" Binding="{Binding Path=type, Mode=TwoWay, ValidatesOnDataErrors=True}" EditingElementStyle="{StaticResource DataGridTextBoxStyle}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                                    <DataGridTextColumn Header="" Binding="{Binding Path=options, Mode=TwoWay, ValidatesOnDataErrors=True}" EditingElementStyle="{StaticResource DataGridTextBoxStyle}" ElementStyle="{StaticResource DataGridTextBlockStyleWithToolTip}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StatusBar Grid.Row="2" Style="{StaticResource StatusBarStyle}">
+                                <TextBlock Text="{Binding Path=SelectedItems.Count}" Style="{StaticResource StatusTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Path=Collection.Count}" Style="{StaticResource StatusTextBlockStyle}"/>
+                           
+                            </StatusBar>
+                            <ProgressBar Grid.RowSpan="3" Style="{StaticResource ModuleProgressBarStyle}" Maximum="{Binding Path=ProgressMax}" Value="{Binding Path=Progress, Mode=OneWay}" IsIndeterminate="{Binding Path=ProgressIsIndeterminate}" Visibility="{Binding Path=InProgress, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Grid>
+                    </TabItem>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+           
+</ResourceDictionary>

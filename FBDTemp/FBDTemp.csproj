@@ -81,6 +81,7 @@
     <Compile Include="Converters\ConOrientHorAlignmConverter.cs" />
     <Compile Include="Converters\ConOrientstionVertAligmConverter.cs" />
     <Compile Include="Converters\ImageUrlConverter.cs" />
+    <Compile Include="Converters\InvertConverter.cs" />
     <Compile Include="Helpers\ConnectorInfo.cs" />
     <Compile Include="Helpers\ConnectorInfoBase.cs" />
     <Compile Include="Helpers\DragObject.cs" />
